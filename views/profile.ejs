@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profile - TestDemo Auth</title>
+  <link rel="stylesheet" href="/css/retro.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .navbar {
+      background: rgba(255, 255, 255, 0.95);
+      padding: 1rem 2rem;
+      border-radius: 10px;
+      margin-bottom: 2rem;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .navbar h1 {
+      color: #667eea;
+      font-size: 1.5rem;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .nav-links a {
+      color: #667eea;
+      text-decoration: none;
+      padding: 0.5rem 1rem;
+      border-radius: 5px;
+      transition: all 0.3s;
+    }
+
+    .nav-links a:hover {
+      background: #667eea;
+      color: white;
+    }
+
+    .card {
+      background: white;
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+      margin-bottom: 2rem;
+    }
+
+    h2 {
+      color: #667eea;
+      margin-bottom: 1.5rem;
+    }
+
+    .profile-info {
+      background: #f8f9fa;
+      padding: 1.5rem;
+      border-radius: 5px;
+      margin-bottom: 2rem;
+    }
+
+    .profile-info p {
+      margin-bottom: 0.75rem;
+      font-size: 1rem;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 0.25rem 0.75rem;
+      font-size: 0.875rem;
+      border-radius: 3px;
+      margin-left: 0.5rem;
+    }
+
+    .badge-success {
+      background: #28a745;
+      color: white;
+    }
+
+    .badge-warning {
+      background: #ffc107;
+      color: #333;
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 0.5rem;
+      color: #555;
+      font-weight: 500;
+    }
+
+    input {
+      width: 100%;
+      padding: 0.75rem;
+      border: 2px solid #e1e8ed;
+      border-radius: 5px;
+      font-size: 1rem;
+      transition: border-color 0.3s;
+    }
+
+    input:focus {
+      outline: none;
+      border-color: #667eea;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 0.75rem 1.5rem;
+      background: #667eea;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 1rem;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.3s;
+    }
+
+    .btn:hover {
+      background: #5568d3;
+    }
+
+    .btn-success {
+      background: #28a745;
+    }
+
+    .btn-success:hover {
+      background: #218838;
+    }
+
+    .btn-block {
+      width: 100%;
+    }
+
+    .alert {
+      padding: 1rem;
+      border-radius: 5px;
+      margin-bottom: 1rem;
+    }
+
+    .alert-danger {
+      background: #f8d7da;
+      color: #721c24;
+      border: 1px solid #f5c6cb;
+    }
+
+    .alert-success {
+      background: #d4edda;
+      color: #155724;
+      border: 1px solid #c3e6cb;
+    }
+
+    .alert-warning {
+      background: #fff3cd;
+      color: #856404;
+      border: 1px solid #ffeeba;
+    }
+
+    @media (max-width: 768px) {
+      .navbar {
+        padding: 1rem;
+      }
+
+      .navbar h1 {
+        font-size: 1.25rem;
+        width: 100%;
+        margin-bottom: 1rem;
+      }
+
+      .nav-links {
+        width: 100%;
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Retro Mode Toggle Button -->
+  <button class="retro-toggle" aria-label="Enable retro mode" title="Enable retro mode">
+    <span class="retro-icon">🎨</span>
+  </button>
+
+  <div class="container">
+    <nav class="navbar">
+      <h1>TestDemo</h1>
+      <div class="nav-links">
+        <a href="/">Home</a>
+        <a href="/profile">Profile</a>
+        <a href="/logout">Logout</a>
+      </div>
+    </nav>
+
+    <div class="card">
+      <h2>My Profile</h2>
+
+      <% if (typeof errors !== 'undefined' && errors.length > 0) { %>
+        <div class="alert alert-danger">
+          <% errors.forEach(error => { %>
+            <div><%= error.msg %></div>
+          <% }) %>
+        </div>
+      <% } %>
+
+      <% if (typeof success !== 'undefined') { %>
+        <div class="alert alert-success">
+          <%= success %>
+        </div>
+      <% } %>
+
+      <div class="profile-info">
+        <p><strong>Name:</strong> <%= user.name %></p>
+        <p><strong>Email:</strong> <%= user.email %></p>
+        <p>
+          <strong>Status:</strong>
+          <% if (user.isVerified) { %>
+            <span class="badge badge-success">Verified</span>
+          <% } else { %>
+            <span class="badge badge-warning">Not Verified</span>
+          <% } %>
+        </p>
+        <p><strong>Member Since:</strong> <%= new Date(user.createdAt).toLocaleDateString() %></p>
+      </div>
+
+      <% if (!user.isVerified) { %>
+        <div class="alert alert-warning">
+          <p><strong>Email not verified!</strong></p>
+          <p>Please check your email for the verification link.</p>
+          <button onclick="resendVerification()" class="btn btn-success" style="margin-top: 0.5rem;">
+            Resend Verification Email
+          </button>
+        </div>
+      <% } %>
+
+      <h3 style="margin-top: 2rem; margin-bottom: 1rem; color: #667eea;">Update Profile</h3>
+      <form action="/profile" method="POST">
+        <div class="form-group">
+          <label for="name">Full Name</label>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            value="<%= user.name %>"
+            required
+          >
+        </div>
+
+        <button type="submit" class="btn btn-block">Update Profile</button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    async function resendVerification() {
+      try {
+        const response = await fetch('/resend-verification', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        });
+
+        const data = await response.json();
+
+        if (data.success) {
+          alert('Verification email sent! Please check your inbox.');
+        } else {
+          alert(data.message || 'Failed to send verification email.');
+        }
+      } catch (error) {
+        alert('An error occurred. Please try again.');
+      }
+    }
+  </script>
+
+  <script src="/js/retro.js"></script>
+</body>
+</html>
