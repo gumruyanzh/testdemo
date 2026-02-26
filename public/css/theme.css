@@ -1,0 +1,191 @@
+/* Root CSS Variables for Theme System */
+:root {
+  /* Light Mode Colors (Default) */
+  --bg-primary: #ffffff;
+  --bg-secondary: #f8f9fa;
+  --bg-gradient-start: #667eea;
+  --bg-gradient-end: #764ba2;
+  --bg-navbar: rgba(255, 255, 255, 0.95);
+  --bg-card: #ffffff;
+  --bg-overlay: rgba(255, 255, 255, 0.1);
+
+  /* Text Colors */
+  --text-primary: #333333;
+  --text-secondary: #555555;
+  --text-muted: #6c757d;
+  --text-white: #ffffff;
+  --text-brand: #667eea;
+
+  /* Border Colors */
+  --border-color: #e1e8ed;
+  --border-light: #dee2e6;
+
+  /* Button Colors */
+  --btn-primary: #667eea;
+  --btn-primary-hover: #5568d3;
+  --btn-secondary: #6c757d;
+  --btn-secondary-hover: #5a6268;
+  --btn-success: #28a745;
+  --btn-success-hover: #218838;
+
+  /* Alert Colors */
+  --alert-danger-bg: #f8d7da;
+  --alert-danger-text: #721c24;
+  --alert-danger-border: #f5c6cb;
+
+  --alert-success-bg: #d4edda;
+  --alert-success-text: #155724;
+  --alert-success-border: #c3e6cb;
+
+  --alert-warning-bg: #fff3cd;
+  --alert-warning-text: #856404;
+  --alert-warning-border: #ffeeba;
+
+  --alert-info-bg: #d1ecf1;
+  --alert-info-text: #0c5460;
+  --alert-info-border: #bee5eb;
+
+  /* Badge Colors */
+  --badge-success-bg: #28a745;
+  --badge-success-text: #ffffff;
+  --badge-warning-bg: #ffc107;
+  --badge-warning-text: #333333;
+
+  /* Shadow Colors */
+  --shadow-sm: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 10px 25px rgba(0, 0, 0, 0.2);
+  --shadow-text: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Dark Mode Colors */
+[data-theme="dark"] {
+  --bg-primary: #1a1a1a;
+  --bg-secondary: #2d2d2d;
+  --bg-gradient-start: #1a1a2e;
+  --bg-gradient-end: #16213e;
+  --bg-navbar: rgba(45, 45, 45, 0.95);
+  --bg-card: #2d2d2d;
+  --bg-overlay: rgba(255, 255, 255, 0.05);
+
+  /* Text Colors */
+  --text-primary: #e4e4e4;
+  --text-secondary: #b8b8b8;
+  --text-muted: #9a9a9a;
+  --text-white: #ffffff;
+  --text-brand: #8b9dff;
+
+  /* Border Colors */
+  --border-color: #404040;
+  --border-light: #4a4a4a;
+
+  /* Button Colors */
+  --btn-primary: #7c8fff;
+  --btn-primary-hover: #6879f0;
+  --btn-secondary: #4a5568;
+  --btn-secondary-hover: #3d4756;
+  --btn-success: #34c759;
+  --btn-success-hover: #2bb34d;
+
+  /* Alert Colors */
+  --alert-danger-bg: #3d1f1f;
+  --alert-danger-text: #ff6b6b;
+  --alert-danger-border: #5a2d2d;
+
+  --alert-success-bg: #1f3d28;
+  --alert-success-text: #6bff8f;
+  --alert-success-border: #2d5a3d;
+
+  --alert-warning-bg: #3d3a1f;
+  --alert-warning-text: #ffd93d;
+  --alert-warning-border: #5a552d;
+
+  --alert-info-bg: #1f2f3d;
+  --alert-info-text: #6bc5ff;
+  --alert-info-border: #2d4a5a;
+
+  /* Badge Colors */
+  --badge-success-bg: #34c759;
+  --badge-success-text: #000000;
+  --badge-warning-bg: #ffd93d;
+  --badge-warning-text: #1a1a1a;
+
+  /* Shadow Colors */
+  --shadow-sm: 0 4px 6px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 10px 25px rgba(0, 0, 0, 0.5);
+  --shadow-text: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+/* Theme Toggle Button Styles */
+.theme-toggle {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  background: var(--bg-card);
+  border: 2px solid var(--border-color);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: var(--shadow-sm);
+}
+
+.theme-toggle:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.theme-toggle:active {
+  transform: translateY(0);
+}
+
+.theme-toggle svg {
+  width: 24px;
+  height: 24px;
+  fill: var(--text-brand);
+  transition: all 0.3s ease;
+}
+
+.theme-toggle:hover svg {
+  fill: var(--btn-primary-hover);
+}
+
+/* Hide icons based on theme */
+[data-theme="light"] .theme-toggle .moon-icon {
+  display: block;
+}
+
+[data-theme="light"] .theme-toggle .sun-icon {
+  display: none;
+}
+
+[data-theme="dark"] .theme-toggle .moon-icon {
+  display: none;
+}
+
+[data-theme="dark"] .theme-toggle .sun-icon {
+  display: block;
+}
+
+/* Smooth transition for theme changes */
+body,
+.card,
+.navbar,
+input,
+button,
+.alert,
+.badge {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+/* Accessibility: Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
